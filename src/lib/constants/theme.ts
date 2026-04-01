@@ -19,7 +19,7 @@ export const colors = {
     dangerDark: '#960018',
   },
   light: {
-    bgPrimary: '#EBEBEB',
+    bgPrimary: '#EAEAEA',
     bgBody: '#F5F5F5',
     bgDeep: '#FFFFFF',
     black: '#000000',
@@ -29,6 +29,29 @@ export const colors = {
     accentLight: '#96F5F5',
     danger: '#ED2939',
     dangerDark: '#960018',
+  },
+} as const;
+
+export const highlightColors = {
+  dark: {
+    highlight: '#5CCDED',
+    highlightGlow: '#58CAEC',
+    tileBorder: '#303030',
+    separator: '#3A3A3A',
+    iconBg: '#454545',
+    settingsSidebarBg: '#323232',
+    settingsSelectedText: '#00FFD8',
+    settingsSelectedBorder: '#00D4CC',
+  },
+  light: {
+    highlight: '#4CE5C6',
+    highlightGlow: '#35F4CB',
+    tileBorder: '#D4D4D4',
+    separator: '#D0D0D0',
+    iconBg: '#FFFFFF',
+    settingsSidebarBg: '#EEEEEE',
+    settingsSelectedText: '#56F9DC',
+    settingsSelectedBorder: '#4BF8DC',
   },
 } as const;
 
@@ -66,14 +89,15 @@ export const spacing = {
 } as const;
 
 export const layout = {
-  topBarHeight: '36px',
+  topBarHeight: '5.19vh',
   tile: {
-    borderRadius: '8px',
+    borderRadius: '4px',
     padding: '6px',
-    borderWidth: '4px',
+    selectedBorder: '6px',
+    unselectedBorder: '2px',
   },
   bottomNav: {
-    iconSize: '24px',
+    iconSpacing: '123px',
     sectionMargin: '0 20px',
   },
 } as const;

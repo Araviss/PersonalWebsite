@@ -31,7 +31,7 @@ export function GameTile({ project, isSelected, onSelect, onLaunch }: GameTilePr
     >
       {/* Cover art */}
       <div
-        className={`relative h-40 w-40 overflow-hidden rounded-tile bg-surface-elevated transition-colors ${
+        className={`relative h-28 w-28 sm:h-32 sm:w-32 lg:h-40 lg:w-40 overflow-hidden rounded-tile bg-surface-elevated transition-colors ${
           isSelected ? 'ring-4 ring-accent' : 'ring-2 ring-transparent'
         }`}
       >
@@ -41,7 +41,7 @@ export function GameTile({ project, isSelected, onSelect, onLaunch }: GameTilePr
             alt=""
             fill
             className="object-cover"
-            sizes="160px"
+            sizes="(max-width: 640px) 112px, (max-width: 1024px) 128px, 160px"
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center">
@@ -54,7 +54,7 @@ export function GameTile({ project, isSelected, onSelect, onLaunch }: GameTilePr
 
       {/* Title */}
       <motion.span
-        className={`max-w-[200px] truncate text-sm font-medium transition-colors ${
+        className={`max-w-[112px] sm:max-w-[128px] lg:max-w-[160px] truncate text-sm font-medium transition-colors ${
           isSelected ? 'text-accent' : 'text-on-surface'
         }`}
         animate={{ color: isSelected ? '#00C3E3' : undefined }}

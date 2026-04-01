@@ -25,7 +25,7 @@ export function TopBar() {
 
   return (
     <header
-      className="flex h-9 w-full shrink-0 items-center justify-between px-5 text-on-surface-muted"
+      className="flex h-14 w-full shrink-0 items-center justify-between px-5 text-on-surface-muted"
       role="banner"
     >
       {/* Left: user identity */}

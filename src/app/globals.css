@@ -20,7 +20,7 @@
   --color-muted: #737a80;
 
   /* Radii */
-  --radius-tile: 8px;
+  --radius-tile: 4px;
 
   /* Animation */
   --ease-switch: cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -34,14 +34,33 @@
   --surface-deep: #161616;
   --on-surface: #ffffff;
   --on-surface-muted: #737a80;
+
+  /* Theme-specific highlight colors (per Switch spec) */
+  --highlight: #5ccded;
+  --highlight-glow: #58caec;
+  --tile-border: #303030;
+  --separator: #3a3a3a;
+  --icon-bg: #454545;
+  --settings-sidebar-bg: #323232;
+  --settings-selected-text: #00ffd8;
+  --settings-selected-border: #00d4cc;
 }
 
 [data-theme="light"] {
-  --surface: #ebebeb;
+  --surface: #eaeaea;
   --surface-elevated: #f5f5f5;
   --surface-deep: #ffffff;
   --on-surface: #2d2d2d;
   --on-surface-muted: #737a80;
+
+  --highlight: #4ce5c6;
+  --highlight-glow: #35f4cb;
+  --tile-border: #d4d4d4;
+  --separator: #d0d0d0;
+  --icon-bg: #ffffff;
+  --settings-sidebar-bg: #eeeeee;
+  --settings-selected-text: #56f9dc;
+  --settings-selected-border: #4bf8dc;
 }
 
 /* Bridge runtime CSS vars into Tailwind utilities */
@@ -51,6 +70,14 @@
   --color-surface-deep: var(--surface-deep);
   --color-on-surface: var(--on-surface);
   --color-on-surface-muted: var(--on-surface-muted);
+  --color-highlight: var(--highlight);
+  --color-highlight-glow: var(--highlight-glow);
+  --color-tile-border: var(--tile-border);
+  --color-separator: var(--separator);
+  --color-icon-bg: var(--icon-bg);
+  --color-settings-sidebar-bg: var(--settings-sidebar-bg);
+  --color-settings-selected-text: var(--settings-selected-text);
+  --color-settings-selected-border: var(--settings-selected-border);
 }
 
 /* ── Base styles ── */
@@ -64,8 +91,8 @@ body {
   font-family: var(--font-sans);
 }
 
-/* Landscape-only gate (mobile portrait → rotation prompt) */
-@media (orientation: portrait) and (max-width: 768px) {
+/* Landscape-only gate — show content only in landscape or wide viewports */
+@media (max-aspect-ratio: 1/1) and (max-width: 1024px) {
   .switch-content {
     display: none;
   }
@@ -75,7 +102,7 @@ body {
   }
 }
 
-@media (orientation: landscape), (min-width: 769px) {
+@media (min-aspect-ratio: 1/1), (min-width: 1025px) {
   .rotate-prompt {
     display: none;
   }

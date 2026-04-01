@@ -9,7 +9,7 @@ describe('Theme design tokens', () => {
   });
 
   it('has light theme colors defined', () => {
-    expect(colors.light.bgPrimary).toBe('#EBEBEB');
+    expect(colors.light.bgPrimary).toBe('#EAEAEA');
     expect(colors.light.accent).toBe('#00C3E3');
   });
 
