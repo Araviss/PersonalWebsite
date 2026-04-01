@@ -2,6 +2,12 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { GameRow } from './GameRow';
 
+// Mock next/navigation
+const mockPush = vi.fn();
+vi.mock('next/navigation', () => ({
+  useRouter: () => ({ push: mockPush }),
+}));
+
 // Mock projects data
 vi.mock('@/data/projects', () => ({
   projects: [
