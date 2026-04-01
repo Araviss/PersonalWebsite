@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { colors, typography, animation } from './theme';
+import { colors, typography, animation, zIndex, breakpoints } from './theme';
 
 describe('Theme design tokens', () => {
   it('has dark theme colors defined', () => {
@@ -21,5 +21,19 @@ describe('Theme design tokens', () => {
   it('has animation durations defined', () => {
     expect(animation.duration.fast).toBeLessThan(animation.duration.normal);
     expect(animation.duration.launch).toBeGreaterThan(animation.duration.slow);
+  });
+
+  it('has z-index scale in ascending order', () => {
+    expect(zIndex.base).toBeLessThan(zIndex.tiles);
+    expect(zIndex.tiles).toBeLessThan(zIndex.nav);
+    expect(zIndex.nav).toBeLessThan(zIndex.overlay);
+    expect(zIndex.overlay).toBeLessThan(zIndex.modal);
+    expect(zIndex.modal).toBeLessThan(zIndex.rotatePrompt);
+  });
+
+  it('has breakpoints in ascending order', () => {
+    expect(breakpoints.sm).toBeLessThan(breakpoints.md);
+    expect(breakpoints.md).toBeLessThan(breakpoints.lg);
+    expect(breakpoints.lg).toBeLessThan(breakpoints.xl);
   });
 });

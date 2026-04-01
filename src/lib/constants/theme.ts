@@ -90,3 +90,23 @@ export const animation = {
     snappy: [0.4, 0, 0.2, 1],
   },
 } as const;
+
+export const zIndex = {
+  base: 0,
+  tiles: 10,
+  nav: 20,
+  overlay: 30,
+  modal: 40,
+  rotatePrompt: 50,
+} as const;
+
+export const breakpoints = {
+  /** Minimum supported width (Switch handheld ≈ 720px) */
+  sm: 640,
+  /** Tablet landscape */
+  md: 768,
+  /** Desktop */
+  lg: 1024,
+  /** Large desktop */
+  xl: 1280,
+} as const;
