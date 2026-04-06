@@ -32,11 +32,19 @@ export function TopBar() {
       {/* Left: user identity */}
       <div className="flex items-center gap-2">
         <div
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-[#e60012]"
+          className="h-10 w-10 overflow-hidden rounded-full ring-2 ring-[#e60012]"
           aria-hidden="true"
           data-testid="avatar"
         >
-          <span className="text-sm font-bold text-white select-none">JL</span>
+          <video
+            src="/avatar.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="h-full w-full object-cover"
+            style={{ objectPosition: 'center top' }}
+          />
         </div>
         <span className="text-base font-medium text-on-surface">Jzon Livingston</span>
       </div>
