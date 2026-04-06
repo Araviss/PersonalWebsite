@@ -44,6 +44,7 @@
   --settings-sidebar-bg: #323232;
   --settings-selected-text: #00ffd8;
   --settings-selected-border: #00d4cc;
+  --tile-empty: #3a3a3a;
 }
 
 [data-theme="light"] {
@@ -61,6 +62,7 @@
   --settings-sidebar-bg: #eeeeee;
   --settings-selected-text: #56f9dc;
   --settings-selected-border: #4bf8dc;
+  --tile-empty: #f5f5f5;
 }
 
 /* Bridge runtime CSS vars into Tailwind utilities */
@@ -78,6 +80,7 @@
   --color-settings-sidebar-bg: var(--settings-sidebar-bg);
   --color-settings-selected-text: var(--settings-selected-text);
   --color-settings-selected-border: var(--settings-selected-border);
+  --color-tile-empty: var(--tile-empty);
 }
 
 /* ── Base styles ── */

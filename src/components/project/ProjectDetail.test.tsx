@@ -1,7 +1,12 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { ProjectDetail } from './ProjectDetail';
 import type { Project } from '@/data/projects';
+
+// Mock next/navigation
+vi.mock('next/navigation', () => ({
+  useRouter: () => ({ push: vi.fn() }),
+}));
 
 const mockProject: Project = {
   id: 'test-proj',
@@ -33,28 +38,44 @@ describe('ProjectDetail', () => {
     expect(screen.getByText('Next.js')).toBeInTheDocument();
   });
 
-  it('renders tech stack section with label', () => {
+  it('renders project links with correct attributes', () => {
     render(<ProjectDetail project={mockProject} />);
-    expect(screen.getByLabelText('Tech stack')).toBeInTheDocument();
-  });
-
-  it('renders project links', () => {
-    render(<ProjectDetail project={mockProject} />);
-    const githubLink = screen.getByText('GitHub ↗');
+    const githubLink = screen.getByText('GitHub').closest('a');
     expect(githubLink).toHaveAttribute('href', 'https://github.com/example');
     expect(githubLink).toHaveAttribute('target', '_blank');
     expect(githubLink).toHaveAttribute('rel', 'noopener noreferrer');
   });
 
-  it('renders home link', () => {
+  it('renders back button', () => {
     render(<ProjectDetail project={mockProject} />);
-    const homeLink = screen.getByLabelText('Return to home');
-    expect(homeLink).toHaveAttribute('href', '/');
+    expect(screen.getByLabelText('Back to home')).toBeInTheDocument();
   });
 
-  it('does not render links section when empty', () => {
+  it('renders controller button prompts for links', () => {
+    render(<ProjectDetail project={mockProject} />);
+    expect(screen.getByText('A')).toBeInTheDocument();
+    expect(screen.getByText('Y')).toBeInTheDocument();
+  });
+
+  it('renders article with project name in label', () => {
+    render(<ProjectDetail project={mockProject} />);
+    expect(screen.getByLabelText('Test Project project details')).toBeInTheDocument();
+  });
+
+  it('does not render action links when empty', () => {
     const noLinksProject = { ...mockProject, links: [] };
     render(<ProjectDetail project={noLinksProject} />);
-    expect(screen.queryByLabelText('Project links')).not.toBeInTheDocument();
+    expect(screen.queryByText('A')).not.toBeInTheDocument();
+  });
+
+  it('renders role when provided', () => {
+    const withRole = { ...mockProject, role: 'Lead Developer' };
+    render(<ProjectDetail project={withRole} />);
+    expect(screen.getByText('Lead Developer')).toBeInTheDocument();
+  });
+
+  it('falls back to Portfolio Project when no role', () => {
+    render(<ProjectDetail project={mockProject} />);
+    expect(screen.getByText('Portfolio Project')).toBeInTheDocument();
   });
 });
