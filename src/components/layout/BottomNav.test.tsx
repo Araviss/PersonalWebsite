@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { BottomNav } from './BottomNav';
 import { navItems } from '@/data/navigation';
 
@@ -14,36 +14,64 @@ describe('BottomNav', () => {
     expect(screen.getByRole('navigation', { name: 'Main navigation' })).toBeInTheDocument();
   });
 
-  it('renders all nav items as links', () => {
+  it('renders nav items as links (except resume which is a button)', () => {
     render(<BottomNav />);
     const links = screen.getAllByRole('link');
-    expect(links).toHaveLength(navItems.length);
+    // Resume is a button, so 4 links
+    expect(links).toHaveLength(navItems.length - 1);
+  });
+
+  it('renders resume as a download button', () => {
+    render(<BottomNav />);
+    const resumeButton = screen.getByRole('button', { name: /download resume/i });
+    expect(resumeButton).toBeInTheDocument();
   });
 
   it('renders labels for all nav items', () => {
     render(<BottomNav />);
-    for (const item of navItems) {
-      expect(screen.getByText(item.label)).toBeInTheDocument();
-    }
+    // All labels should now be visible (active and inactive)
+    expect(screen.getByText('Home')).toBeInTheDocument();
+    expect(screen.getByText('News')).toBeInTheDocument();
+    expect(screen.getByText('Resume')).toBeInTheDocument();
+    expect(screen.getByText('Contact')).toBeInTheDocument();
+    expect(screen.getByText('Settings')).toBeInTheDocument();
   });
 
   it('marks the active route with aria-current', () => {
     render(<BottomNav />);
-    const homeLink = screen.getByRole('link', { name: /Home/i });
+    // Home link at '/' is active — find by href since label may not be accessible name
+    const links = screen.getAllByRole('link');
+    const homeLink = links.find((l) => l.getAttribute('href') === '/');
     expect(homeLink).toHaveAttribute('aria-current', 'page');
   });
 
   it('does not mark inactive routes with aria-current', () => {
     render(<BottomNav />);
-    const aboutLink = screen.getByRole('link', { name: /About/i });
+    const links = screen.getAllByRole('link');
+    const aboutLink = links.find((l) => l.getAttribute('href') === '/about');
     expect(aboutLink).not.toHaveAttribute('aria-current');
   });
 
-  it('links to correct hrefs', () => {
+  it('opens resume modal when resume button is clicked', () => {
     render(<BottomNav />);
-    for (const item of navItems) {
-      const link = screen.getByRole('link', { name: new RegExp(item.label, 'i') });
-      expect(link).toHaveAttribute('href', item.href);
-    }
+    const resumeButton = screen.getByRole('button', { name: /download resume/i });
+    fireEvent.click(resumeButton);
+    // Modal should appear
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+    expect(screen.getByText(/Download Jzon Livingston/)).toBeInTheDocument();
+  });
+
+  it('closes resume modal when cancel is clicked', async () => {
+    render(<BottomNav />);
+    const resumeButton = screen.getByRole('button', { name: /download resume/i });
+    fireEvent.click(resumeButton);
+    
+    const cancelButton = screen.getByRole('button', { name: 'Cancel' });
+    fireEvent.click(cancelButton);
+    
+    // Modal should be closed (wait for animation)
+    await waitFor(() => {
+      expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    });
   });
 });

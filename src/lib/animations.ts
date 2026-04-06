@@ -23,21 +23,19 @@ export const launchTransition: Transition = {
 export const tileVariants: Variants = {
   idle: {
     scale: 1,
-    boxShadow: '0 0 0 0px rgba(0, 195, 227, 0)',
+    transition: { type: 'spring', stiffness: 300, damping: 25 },
   },
   hover: {
-    scale: 1.08,
-    boxShadow: '0 0 20px 4px rgba(0, 195, 227, 0.4)',
+    scale: 1.02,
     transition: snappyTransition,
   },
   tap: {
-    scale: 0.96,
+    scale: 0.98,
     transition: { duration: animation.duration.fast },
   },
   selected: {
-    scale: 1.08,
-    boxShadow: '0 0 24px 6px rgba(0, 195, 227, 0.5)',
-    transition: switchTransition,
+    scale: 1,
+    transition: { type: 'spring', stiffness: 400, damping: 22 },
   },
 };
 
@@ -58,16 +56,16 @@ export const launchOverlayVariants: Variants = {
 /* ── Page / screen transitions ── */
 
 export const pageVariants: Variants = {
-  initial: { opacity: 0, y: 12 },
+  initial: { opacity: 0, x: 40 },
   enter: {
     opacity: 1,
-    y: 0,
-    transition: switchTransition,
+    x: 0,
+    transition: { duration: 0.25, ease: [0.25, 0.1, 0.25, 1] },
   },
   exit: {
     opacity: 0,
-    y: -12,
-    transition: { duration: animation.duration.fast },
+    x: -40,
+    transition: { duration: 0.15 },
   },
 };
 
@@ -92,6 +90,21 @@ export const fadeVariants: Variants = {
   visible: {
     opacity: 1,
     transition: switchTransition,
+  },
+};
+
+/* ── Boot screen (faithful to Switch startup timing) ── */
+
+// Black (0s) → snap red (1.2s) → hold (4.5s) → fade white (1.2s) → done
+export const bootLogoVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 0.08, ease: 'linear' },
+  },
+  exit: {
+    opacity: 0,
+    transition: { duration: 0 },
   },
 };
 

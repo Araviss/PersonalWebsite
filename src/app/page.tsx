@@ -1,3 +1,5 @@
+'use client';
+
 import { GameRow } from '@/components/tiles';
 
 export default function Home() {

@@ -3,37 +3,29 @@ import { render, screen } from '@testing-library/react';
 import { ContactSection } from './ContactSection';
 
 describe('ContactSection', () => {
-  it('renders the heading', () => {
+  it('renders 4 contact slots', () => {
     render(<ContactSection />);
-    expect(screen.getByRole('heading', { level: 1, name: /contact/i })).toBeInTheDocument();
+    const slots = screen.getAllByRole('button');
+    expect(slots).toHaveLength(4);
   });
 
-  it('renders the subtitle', () => {
+  it('renders LinkedIn slot', () => {
     render(<ContactSection />);
-    expect(screen.getByText(/always open to interesting conversations/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/linkedin/i)).toBeInTheDocument();
   });
 
-  it('renders email link', () => {
+  it('renders GitHub slot', () => {
     render(<ContactSection />);
-    const emailLink = screen.getByRole('link', { name: /email/i });
-    expect(emailLink).toHaveAttribute('href', 'mailto:hello@example.com');
+    expect(screen.getByLabelText(/github/i)).toBeInTheDocument();
   });
 
-  it('renders GitHub link with external attributes', () => {
+  it('renders Email slot', () => {
     render(<ContactSection />);
-    const ghLink = screen.getByRole('link', { name: /github/i });
-    expect(ghLink).toHaveAttribute('href', 'https://github.com');
-    expect(ghLink).toHaveAttribute('target', '_blank');
-    expect(ghLink).toHaveAttribute('rel', 'noopener noreferrer');
+    expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
   });
 
-  it('renders LinkedIn link', () => {
+  it('renders X / Twitter slot', () => {
     render(<ContactSection />);
-    expect(screen.getByRole('link', { name: /linkedin/i })).toBeInTheDocument();
-  });
-
-  it('renders availability status', () => {
-    render(<ContactSection />);
-    expect(screen.getByText(/currently open to new opportunities/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/twitter/i)).toBeInTheDocument();
   });
 });

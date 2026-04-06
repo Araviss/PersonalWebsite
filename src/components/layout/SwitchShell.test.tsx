@@ -2,9 +2,13 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { SwitchShell } from './SwitchShell';
 
-// Mock next/navigation for BottomNav
+// Mock next/navigation for BottomNav and BottomBar
 vi.mock('next/navigation', () => ({
   usePathname: () => '/',
+  useRouter: () => ({
+    back: vi.fn(),
+    push: vi.fn(),
+  }),
 }));
 
 describe('SwitchShell', () => {

@@ -15,7 +15,7 @@ describe('TopBar', () => {
 
   it('displays the site name', () => {
     render(<TopBar />);
-    expect(screen.getByText('Portfolio')).toBeInTheDocument();
+    expect(screen.getByText('Jzon Livingston')).toBeInTheDocument();
   });
 
   it('renders an avatar placeholder', () => {

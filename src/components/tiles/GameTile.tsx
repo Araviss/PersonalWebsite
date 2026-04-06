@@ -2,7 +2,8 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { tileVariants, snappyTransition } from '@/lib/animations';
+import { tileVariants } from '@/lib/animations';
+import { TileCover } from './TileCover';
 import type { Project } from '@/data/projects';
 
 interface GameTileProps {
@@ -15,7 +16,7 @@ interface GameTileProps {
 export function GameTile({ project, isSelected, onSelect, onLaunch }: GameTileProps) {
   return (
     <motion.button
-      className="group flex shrink-0 flex-col items-center gap-2 outline-none"
+      className="group flex shrink-0 flex-col items-center outline-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-highlight"
       variants={tileVariants}
       initial="idle"
       animate={isSelected ? 'selected' : 'idle'}
@@ -31,8 +32,10 @@ export function GameTile({ project, isSelected, onSelect, onLaunch }: GameTilePr
     >
       {/* Cover art */}
       <div
-        className={`relative h-28 w-28 sm:h-32 sm:w-32 lg:h-40 lg:w-40 overflow-hidden rounded-tile bg-surface-elevated transition-colors ${
-          isSelected ? 'ring-4 ring-accent' : 'ring-2 ring-transparent'
+        className={`relative w-[20vw] min-w-[112px] max-w-[400px] aspect-square overflow-hidden rounded-tile bg-surface-elevated transition-all duration-200 ease-out ${
+          isSelected
+            ? 'ring-[6px] ring-highlight shadow-[0_0_12px_4px] shadow-highlight-glow'
+            : 'ring-[6px] ring-tile-border/40 opacity-[0.85]'
         }`}
       >
         {project.coverArt ? (
@@ -41,27 +44,12 @@ export function GameTile({ project, isSelected, onSelect, onLaunch }: GameTilePr
             alt=""
             fill
             className="object-cover"
-            sizes="(max-width: 640px) 112px, (max-width: 1024px) 128px, 160px"
+            sizes="20vw"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center">
-            <span className="text-3xl font-bold text-accent">
-              {project.title.charAt(0)}
-            </span>
-          </div>
+          <TileCover project={project} />
         )}
       </div>
-
-      {/* Title */}
-      <motion.span
-        className={`max-w-[112px] sm:max-w-[128px] lg:max-w-[160px] truncate text-sm font-medium transition-colors ${
-          isSelected ? 'text-accent' : 'text-on-surface'
-        }`}
-        animate={{ color: isSelected ? '#00C3E3' : undefined }}
-        transition={snappyTransition}
-      >
-        {project.title}
-      </motion.span>
     </motion.button>
   );
 }

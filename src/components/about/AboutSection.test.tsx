@@ -1,38 +1,59 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { AboutSection } from './AboutSection';
 
 describe('AboutSection', () => {
-  it('renders the heading', () => {
+  it('renders the News heading', () => {
     render(<AboutSection />);
-    expect(screen.getByRole('heading', { level: 1, name: /about me/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1, name: /news/i })).toBeInTheDocument();
   });
 
-  it('renders the role subtitle', () => {
+  it('renders a grid of news cards', () => {
     render(<AboutSection />);
-    expect(screen.getByText('Software Engineer')).toBeInTheDocument();
+    const buttons = screen.getAllByRole('button');
+    // 8 card buttons + 1 back button (only when detail open) → just card buttons for now
+    expect(buttons.length).toBeGreaterThanOrEqual(8);
   });
 
-  it('renders the biography section', () => {
+  it('renders article titles in the grid', () => {
     render(<AboutSection />);
-    expect(screen.getByLabelText(/biography/i)).toBeInTheDocument();
+    expect(screen.getByText(/console-quality design obsession/i)).toBeInTheDocument();
+    expect(screen.getByText(/microservices migration/i)).toBeInTheDocument();
+    expect(screen.getByText(/go-to stack/i)).toBeInTheDocument();
+    expect(screen.getByText(/smash, keyboards, coffee/i)).toBeInTheDocument();
   });
 
-  it('renders skills', () => {
+  it('opens detail panel when a card is clicked', () => {
     render(<AboutSection />);
-    expect(screen.getByText('TypeScript')).toBeInTheDocument();
-    expect(screen.getByText('React')).toBeInTheDocument();
-    expect(screen.getByText('Python')).toBeInTheDocument();
+    const card = screen.getByLabelText(/console-quality design obsession/i);
+    fireEvent.click(card);
+    // Detail panel shows the body text
+    expect(screen.getByText(/every animation, every transition/i)).toBeInTheDocument();
+    // And a back button
+    expect(screen.getByText(/back to news/i)).toBeInTheDocument();
   });
 
-  it('renders interests', () => {
+  it('closes detail panel when back button is clicked', async () => {
     render(<AboutSection />);
-    expect(screen.getByText('Open Source')).toBeInTheDocument();
-    expect(screen.getByText('AI/ML Tooling')).toBeInTheDocument();
+    const card = screen.getByLabelText(/console-quality design obsession/i);
+    fireEvent.click(card);
+    const back = screen.getByText(/back to news/i);
+    fireEvent.click(back);
+    // AnimatePresence exit animation may delay removal — wait for it
+    await waitFor(() => {
+      expect(screen.queryByText(/every animation, every transition/i)).not.toBeInTheDocument();
+    });
   });
 
-  it('renders the avatar initials', () => {
+  it('renders overlay text on card thumbnails', () => {
     render(<AboutSection />);
-    expect(screen.getByText('NS')).toBeInTheDocument();
+    expect(screen.getByText('About Me')).toBeInTheDocument();
+    expect(screen.getByText('Career')).toBeInTheDocument();
+    expect(screen.getByText('Personal')).toBeInTheDocument();
+  });
+
+  it('renders Find Channels button in the header', () => {
+    render(<AboutSection />);
+    expect(screen.getByText(/find channels/i)).toBeInTheDocument();
   });
 });

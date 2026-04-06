@@ -25,39 +25,46 @@ export function TopBar() {
 
   return (
     <header
-      className="flex h-14 w-full shrink-0 items-center justify-between px-5 text-on-surface-muted"
+      className="flex w-full shrink-0 items-center justify-between px-5 text-on-surface-muted"
+      style={{ height: 'clamp(36px, 5.19vh, 56px)' }}
       role="banner"
     >
       {/* Left: user identity */}
       <div className="flex items-center gap-2">
         <div
-          className="h-6 w-6 rounded-full bg-accent"
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-[#e60012]"
           aria-hidden="true"
           data-testid="avatar"
-        />
-        <span className="text-sm font-medium text-on-surface">Portfolio</span>
+        >
+          <span className="text-sm font-bold text-white select-none">JL</span>
+        </div>
+        <span className="text-base font-medium text-on-surface">Jzon Livingston</span>
       </div>
 
-      {/* Right: status indicators */}
-      <div className="flex items-center gap-3 text-xs">
+      {/* Right: status indicators — Switch style */}
+      <div className="flex items-center gap-3 text-sm">
         <time dateTime={time} suppressHydrationWarning>
           {time}
         </time>
-        {/* WiFi icon placeholder */}
+        {/* WiFi icon — Switch style: 3 curved bars */}
         <svg
-          className="h-4 w-4"
+          className="h-5 w-5"
           viewBox="0 0 24 24"
           fill="currentColor"
           aria-label="WiFi connected"
           role="img"
         >
-          <path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3a4.237 4.237 0 00-6 0zm-4-4l2 2a7.074 7.074 0 0110 0l2-2C15.14 9.14 8.87 9.14 5 13z" />
+          {/* Three curved arcs like Switch WiFi indicator */}
+          <path d="M12 18c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z" />
+          <path d="M12 14c-1.7 0-3.24.69-4.35 1.8l1.41 1.41C9.9 16.46 10.88 16 12 16s2.1.46 2.94 1.21l1.41-1.41A6.014 6.014 0 0012 14z" />
+          <path d="M12 10c-3.03 0-5.78 1.23-7.78 3.22l1.42 1.41A9.008 9.008 0 0112 12c2.48 0 4.74 1.01 6.36 2.63l1.42-1.41A10.96 10.96 0 0012 10z" />
         </svg>
-        {/* Battery placeholder */}
-        <div className="flex items-center gap-1" aria-label="Battery full">
-          <div className="h-3 w-5 rounded-sm border border-current p-px">
-            <div className="h-full w-full rounded-[1px] bg-current" />
+        {/* Battery — Switch style: rounded rectangle with nub */}
+        <div className="flex items-center" aria-label="Battery full">
+          <div className="relative h-4 w-7 rounded-[3px] border-2 border-current">
+            <div className="absolute inset-[2px] rounded-[1px] bg-current" />
           </div>
+          <div className="h-2 w-1 rounded-r-sm bg-current" />
         </div>
       </div>
     </header>

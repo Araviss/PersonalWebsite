@@ -13,8 +13,8 @@ export interface NavItem {
 
 export const navItems: NavItem[] = [
   { id: 'home', label: 'Home', icon: 'home', href: '/' },
-  { id: 'about', label: 'About', icon: 'person', href: '/about' },
-  { id: 'resume', label: 'Resume', icon: 'document', href: '/resume' },
-  { id: 'contact', label: 'Contact', icon: 'mail', href: '/contact' },
+  { id: 'about', label: 'News', icon: 'news', href: '/about' },
+  { id: 'resume', label: 'Resume', icon: 'shop', href: '/resume' },
+  { id: 'contact', label: 'Contact', icon: 'controller', href: '/contact' },
   { id: 'settings', label: 'Settings', icon: 'gear', href: '/settings' },
 ];

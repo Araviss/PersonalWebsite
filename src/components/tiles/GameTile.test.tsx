@@ -25,9 +25,10 @@ describe('GameTile', () => {
     expect(screen.getByLabelText('Test Project')).toBeInTheDocument();
   });
 
-  it('renders the project title text', () => {
+  it('has accessible label with project title', () => {
     render(<GameTile {...defaultProps} />);
-    expect(screen.getByText('Test Project')).toBeInTheDocument();
+    // Title is shown at page level, but tile has aria-label for accessibility
+    expect(screen.getByRole('button', { name: 'Test Project' })).toBeInTheDocument();
   });
 
   it('renders cover art image when provided', () => {
@@ -37,10 +38,11 @@ describe('GameTile', () => {
     expect(img?.getAttribute('src')).toContain('test.png');
   });
 
-  it('renders initial letter when no cover art', () => {
+  it('renders tile cover when no cover art image', () => {
     const noCoverProject = { ...mockProject, coverArt: '' };
     render(<GameTile {...defaultProps} project={noCoverProject} />);
-    expect(screen.getByText('T')).toBeInTheDocument();
+    // TileCover renders title + tech badge inside the tile
+    expect(screen.getByText('TypeScript')).toBeInTheDocument();
   });
 
   it('calls onSelect on click', () => {

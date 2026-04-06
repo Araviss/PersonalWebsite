@@ -6,5 +6,7 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
+  // ContactSection is a full-screen component styled like Switch Controller Pairing
+  // It has its own header/content/footer structure
   return <ContactSection />;
 }

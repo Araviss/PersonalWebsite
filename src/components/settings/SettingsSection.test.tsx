@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { SettingsSection } from './SettingsSection';
 import { ThemeProvider } from '@/components/shared/ThemeProvider';
 
@@ -13,44 +13,49 @@ function renderWithTheme() {
 
 describe('SettingsSection', () => {
   beforeEach(() => {
-    // Reset data-theme and localStorage
     document.documentElement.setAttribute('data-theme', 'dark');
     localStorage.clear();
   });
 
   it('renders the heading', () => {
     renderWithTheme();
-    expect(screen.getByRole('heading', { level: 1, name: /settings/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1, name: /system settings/i })).toBeInTheDocument();
   });
 
-  it('renders the theme toggle', () => {
+  it('renders sidebar categories', () => {
     renderWithTheme();
-    expect(screen.getByRole('switch', { name: /toggle theme/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Themes' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Internet' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'System' })).toBeInTheDocument();
   });
 
-  it('shows current theme mode', () => {
+  it('shows theme options by default', () => {
     renderWithTheme();
-    expect(screen.getByText('Dark mode')).toBeInTheDocument();
+    expect(screen.getByText('Basic White')).toBeInTheDocument();
+    expect(screen.getByText('Basic Black')).toBeInTheDocument();
   });
 
-  it('toggles theme on click', () => {
+  it('toggles to System content on click', async () => {
     renderWithTheme();
-    const toggle = screen.getByRole('switch', { name: /toggle theme/i });
-    expect(toggle).toHaveAttribute('aria-checked', 'false');
-
-    fireEvent.click(toggle);
-    expect(toggle).toHaveAttribute('aria-checked', 'true');
-    expect(screen.getByText('Light mode')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'System' }));
+    await waitFor(() => {
+      expect(screen.getByText('System Update')).toBeInTheDocument();
+    });
+    expect(screen.getByText(/current system version/i)).toBeInTheDocument();
   });
 
-  it('renders the disabled sound toggle', () => {
+  it('shows system info values', async () => {
     renderWithTheme();
-    const soundToggle = screen.getByRole('switch', { name: /toggle sound/i });
-    expect(soundToggle).toHaveAttribute('aria-disabled', 'true');
+    fireEvent.click(screen.getByRole('button', { name: 'System' }));
+    await waitFor(() => {
+      expect(screen.getByText('Portfolio OS')).toBeInTheDocument();
+    });
+    expect(screen.getByText('English')).toBeInTheDocument();
   });
 
-  it('renders version info', () => {
+  it('switches theme when clicking Basic White', () => {
     renderWithTheme();
-    expect(screen.getByText(/portfolio os v1\.0\.0/i)).toBeInTheDocument();
+    fireEvent.click(screen.getByText('Basic White'));
+    expect(document.documentElement.getAttribute('data-theme')).toBe('light');
   });
 });
