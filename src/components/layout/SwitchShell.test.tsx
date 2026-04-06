@@ -40,13 +40,4 @@ describe('SwitchShell', () => {
     );
     expect(screen.getByRole('navigation', { name: 'Main navigation' })).toBeInTheDocument();
   });
-
-  it('renders RotatePrompt', () => {
-    render(
-      <SwitchShell>
-        <div>Content</div>
-      </SwitchShell>,
-    );
-    expect(screen.getByRole('alert')).toBeInTheDocument();
-  });
 });

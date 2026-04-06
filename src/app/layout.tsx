@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/shared/ThemeProvider";
-import { SwitchShell, BootWrapper } from "@/components/layout";
+import { BootWrapper } from "@/components/layout";
 import "./globals.css";
 
 const inter = Inter({
@@ -29,7 +29,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-surface text-on-surface font-sans">
         <ThemeProvider>
           <BootWrapper>
-            <SwitchShell>{children}</SwitchShell>
+            {children}
           </BootWrapper>
         </ThemeProvider>
       </body>
