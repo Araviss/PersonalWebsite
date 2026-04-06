@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 function useCurrentTime() {
   const [time, setTime] = useState<string>('');
@@ -29,11 +30,14 @@ export function TopBar() {
       style={{ height: 'clamp(36px, 5.19vh, 56px)' }}
       role="banner"
     >
-      {/* Left: user identity */}
-      <div className="flex items-center gap-2">
+      {/* Left: user identity — avatar links to profile */}
+      <Link
+        href="/profile"
+        className="flex items-center gap-2 transition-opacity hover:opacity-80"
+        aria-label="View profile"
+      >
         <div
           className="h-10 w-10 overflow-hidden rounded-full ring-2 ring-[#e60012]"
-          aria-hidden="true"
           data-testid="avatar"
         >
           <video
@@ -47,7 +51,7 @@ export function TopBar() {
           />
         </div>
         <span className="text-base font-medium text-on-surface">Jzon Livingston</span>
-      </div>
+      </Link>
 
       {/* Right: status indicators — Switch style */}
       <div className="flex items-center gap-3 text-sm">
@@ -62,7 +66,6 @@ export function TopBar() {
           aria-label="WiFi connected"
           role="img"
         >
-          {/* Three curved arcs like Switch WiFi indicator */}
           <path d="M12 18c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z" />
           <path d="M12 14c-1.7 0-3.24.69-4.35 1.8l1.41 1.41C9.9 16.46 10.88 16 12 16s2.1.46 2.94 1.21l1.41-1.41A6.014 6.014 0 0012 14z" />
           <path d="M12 10c-3.03 0-5.78 1.23-7.78 3.22l1.42 1.41A9.008 9.008 0 0112 12c2.48 0 4.74 1.01 6.36 2.63l1.42-1.41A10.96 10.96 0 0012 10z" />

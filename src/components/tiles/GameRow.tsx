@@ -6,7 +6,11 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { staggerContainer, staggerItem } from '@/lib/animations';
 import { projects } from '@/data/projects';
 import { GameTile } from './GameTile';
+import { EmptyTile } from './EmptyTile';
 import { LaunchOverlay } from './LaunchOverlay';
+
+/** Minimum total slots to display (projects + empty tiles) */
+const MIN_SLOTS = 12;
 
 interface GameRowProps {
   onSelectionChange?: (projectId: string | null) => void;
@@ -24,6 +28,9 @@ export function GameRow({ onSelectionChange }: GameRowProps) {
 
   const launchingProject = projects.find((p) => p.id === launchingId);
   const selectedProject = projects.find((p) => p.id === selectedId);
+  
+  // Calculate empty slots needed to fill minimum
+  const emptySlotCount = Math.max(0, MIN_SLOTS - projects.length);
 
   // Update title position immediately (no animation)
   const updateTitlePosition = useCallback(() => {
@@ -129,6 +136,7 @@ export function GameRow({ onSelectionChange }: GameRowProps) {
         tabIndex={0}
         onKeyDown={handleKeyDown}
       >
+        {/* Project tiles */}
         {projects.map((project) => {
           const isSelected = selectedId === project.id;
           return (
@@ -151,6 +159,11 @@ export function GameRow({ onSelectionChange }: GameRowProps) {
             </motion.div>
           );
         })}
+
+        {/* Empty placeholder tiles — fills remaining slots to MIN_SLOTS */}
+        {Array.from({ length: emptySlotCount }).map((_, i) => (
+          <EmptyTile key={`empty-${i}`} />
+        ))}
       </motion.div>
 
       <LaunchOverlay

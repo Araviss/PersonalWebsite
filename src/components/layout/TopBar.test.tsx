@@ -38,4 +38,11 @@ describe('TopBar', () => {
     render(<TopBar />);
     expect(screen.getByLabelText('Battery full')).toBeInTheDocument();
   });
+
+  it('avatar links to /profile', () => {
+    render(<TopBar />);
+    const profileLink = screen.getByLabelText('View profile');
+    expect(profileLink).toBeInTheDocument();
+    expect(profileLink).toHaveAttribute('href', '/profile');
+  });
 });
