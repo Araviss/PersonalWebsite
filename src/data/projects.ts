@@ -28,17 +28,20 @@ export interface Project {
 }
 
 export const projects: Project[] = [
-  // Add your projects here. Example:
-  // {
-  //   id: 'my-project',
-  //   title: 'My Project',
-  //   description: 'A description of my project.',
-  //   techStack: ['React', 'TypeScript'],
-  //   links: [{ label: 'GitHub', url: 'https://github.com' }],
-  //   theme: {
-  //     gradient: 'linear-gradient(135deg, #e60012 0%, #ff4d4d 100%)',
-  //     icon: 'M12 2L2 7l10 5 10-5-10-5z', // SVG path
-  //     accentColor: '#ffffff',
-  //   },
-  // },
+  {
+    id: 'builders-log',
+    title: "Builder's Log",
+    coverArt: '/builders-log.png',
+    description: 'A living document of the design decisions, iterations, and lessons learned while building this portfolio.',
+    techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+    links: [],
+  },
+  {
+    id: 'duendi',
+    title: 'Duendi',
+    coverArt: '/Duendi.png',
+    description: 'Duendi — a creative project exploring expressive design and interactive experiences.',
+    techStack: ['React', 'TypeScript', 'Node.js'],
+    links: [],
+  },
 ];

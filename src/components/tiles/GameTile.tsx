@@ -22,8 +22,13 @@ export function GameTile({ project, isSelected, onSelect, onLaunch }: GameTilePr
       animate={isSelected ? 'selected' : 'idle'}
       whileHover="hover"
       whileTap="tap"
-      onClick={onSelect}
-      onDoubleClick={onLaunch}
+      onClick={() => {
+        if (isSelected) {
+          onLaunch();
+        } else {
+          onSelect();
+        }
+      }}
       onKeyDown={(e) => {
         if (e.key === 'Enter') onLaunch();
       }}
@@ -43,7 +48,7 @@ export function GameTile({ project, isSelected, onSelect, onLaunch }: GameTilePr
             src={project.coverArt}
             alt=""
             fill
-            className="object-cover"
+            className="object-contain"
             sizes="20vw"
           />
         ) : (

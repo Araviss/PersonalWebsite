@@ -29,12 +29,12 @@ describe('BottomNav', () => {
 
   it('renders labels for all nav items', () => {
     render(<BottomNav />);
-    // All labels should now be visible (active and inactive)
     expect(screen.getByText('Home')).toBeInTheDocument();
     expect(screen.getByText('News')).toBeInTheDocument();
     expect(screen.getByText('Resume')).toBeInTheDocument();
-    expect(screen.getByText('Contact')).toBeInTheDocument();
     expect(screen.getByText('Settings')).toBeInTheDocument();
+    // Contact was moved to bottom bar overlay — not in nav
+    expect(screen.queryByText('Contact')).not.toBeInTheDocument();
   });
 
   it('marks the active route with aria-current', () => {

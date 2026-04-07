@@ -42,6 +42,9 @@ export function ProfilePage() {
             loop
             muted
             playsInline
+            disablePictureInPicture
+            disableRemotePlayback
+            controlsList="nodownload nofullscreen noremoteplayback"
             className="h-full w-full object-cover"
             style={{
               objectPosition: 'center 15%',

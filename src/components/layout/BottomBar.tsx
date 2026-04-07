@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
+import { useContactOverlay } from '@/components/shared/ContactOverlayContext';
 
 /**
  * Handheld Mode Icon - Phone/tablet silhouette
@@ -70,6 +71,7 @@ function DockedIcon() {
 export function BottomBar() {
   const router = useRouter();
   const pathname = usePathname();
+  const { toggle: toggleContact } = useContactOverlay();
   const [isHandheld, setIsHandheld] = useState(true);
 
   // Detect device mode based on screen width
@@ -118,19 +120,16 @@ export function BottomBar() {
 
       {/* Controller prompts */}
       <div className="flex items-center gap-5 text-sm text-on-surface-muted">
-        {/* −/+ Options - always visible */}
-        <span className="flex items-center gap-1.5">
-          <span className="flex items-center gap-0.5 text-xs font-medium">
-            <span className="flex h-5 w-5 items-center justify-center rounded-full border border-current text-[10px]">
-              −
-            </span>
-            <span>/</span>
-            <span className="flex h-5 w-5 items-center justify-center rounded-full border border-current text-[10px]">
-              +
-            </span>
+        {/* Y — Get in Touch CTA */}
+        <button
+          onClick={toggleContact}
+          className="flex items-center gap-1.5 transition-opacity hover:opacity-80"
+        >
+          <span className="flex h-5 w-5 items-center justify-center rounded-full bg-on-surface-muted text-[10px] font-bold text-surface">
+            Y
           </span>
-          <span>Options</span>
-        </span>
+          <span>Get in Touch</span>
+        </button>
 
         {/* B Back - only on non-home pages */}
         {canGoBack && (

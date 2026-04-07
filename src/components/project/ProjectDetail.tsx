@@ -41,7 +41,7 @@ function ButtonPrompt({
 }) {
   return (
     <span className={`flex items-center gap-2 ${className}`}>
-      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/90 text-[11px] font-bold text-black">
+      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-on-surface/90 text-[11px] font-bold text-surface-deep">
         {letter}
       </span>
       <span>{label}</span>
@@ -95,13 +95,13 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
       {/* Back hint — top right */}
       <motion.button
         onClick={() => router.push('/')}
-        className="absolute right-[4.6875vw] top-[6.667vh] z-10 flex items-center gap-2 text-xs text-white/40 transition-colors hover:text-white/70"
+        className="absolute right-[4.6875vw] top-[6.667vh] z-10 flex items-center gap-2 text-xs text-on-surface-muted transition-colors hover:text-on-surface"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4, duration: 0.3 }}
         aria-label="Back to home"
       >
-        <span className="flex h-[18px] w-[18px] items-center justify-center rounded-full bg-white/30 text-[9px] font-bold text-white">
+        <span className="flex h-[18px] w-[18px] items-center justify-center rounded-full bg-on-surface/30 text-[9px] font-bold text-surface-deep">
           B
         </span>
         Back
@@ -127,7 +127,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
 
           {/* Title */}
           <motion.h1
-            className="text-[clamp(24px,5vh,36px)] font-bold leading-tight tracking-tight text-white"
+            className="text-[clamp(24px,5vh,36px)] font-bold leading-tight tracking-tight text-on-surface"
             style={{ letterSpacing: '-0.02em' }}
             variants={childVariants}
           >
@@ -136,7 +136,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
 
           {/* Description */}
           <motion.p
-            className="max-w-[400px] text-base leading-relaxed text-white/50"
+            className="max-w-[400px] text-base leading-relaxed text-on-surface-muted"
             variants={childVariants}
           >
             {project.description}
@@ -150,7 +150,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
             {project.techStack.map((tech) => (
               <span
                 key={tech}
-                className="rounded-[4px] border border-white/15 px-2.5 py-1 text-[11px] font-medium text-white/60"
+                className="rounded-[4px] border border-on-surface/15 px-2.5 py-1 text-[11px] font-medium text-on-surface-muted"
               >
                 {tech}
               </span>
@@ -159,14 +159,14 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
 
           {/* Separator */}
           <motion.div
-            className="my-3 h-px w-full max-w-[400px] bg-white/8"
+            className="my-3 h-px w-full max-w-[400px] bg-separator"
             variants={childVariants}
             aria-hidden="true"
           />
 
           {/* Action buttons — stacked, controller prompts */}
           <motion.div
-            className="flex flex-col gap-3 text-[13px] font-medium text-white/70"
+            className="flex flex-col gap-3 text-[13px] font-medium text-on-surface-muted"
             variants={childVariants}
           >
             {project.links.map((link, i) => (
@@ -191,7 +191,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
         <div className="flex w-[clamp(240px,26.5vw,340px)] shrink-0 flex-col gap-2">
           {/* Hero preview */}
           <motion.div
-            className="aspect-video w-full overflow-hidden rounded-lg border border-white/10 bg-surface-elevated"
+            className="aspect-video w-full overflow-hidden rounded-lg border border-on-surface/10 bg-surface-elevated"
             variants={childVariants}
           >
             {project.coverArt ? (
@@ -231,7 +231,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
               {project.screenshots.slice(0, 3).map((src, i) => (
                 <div
                   key={src}
-                  className="flex-1 overflow-hidden rounded-[4px] border border-white/8"
+                  className="flex-1 overflow-hidden rounded-[4px] border border-on-surface/8"
                   style={{ height: 'clamp(48px, 9.7vh, 70px)' }}
                 >
                   <Image

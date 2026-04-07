@@ -15,6 +15,5 @@ export const navItems: NavItem[] = [
   { id: 'home', label: 'Home', icon: 'home', href: '/' },
   { id: 'about', label: 'News', icon: 'news', href: '/about' },
   { id: 'resume', label: 'Resume', icon: 'shop', href: '/resume' },
-  { id: 'contact', label: 'Contact', icon: 'controller', href: '/contact' },
   { id: 'settings', label: 'Settings', icon: 'gear', href: '/settings' },
 ];
