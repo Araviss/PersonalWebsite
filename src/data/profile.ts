@@ -1,11 +1,7 @@
-export interface Skill {
+export interface TechIcon {
   name: string;
-  /** Years of experience or "first used" text */
-  firstUsed: string;
-  /** Proficiency label shown on the right */
-  proficiency: 'Expert' | 'Advanced' | 'Proficient' | 'Learning';
-  /** 0–100 for the progress bar */
-  level: number;
+  color: string;
+  icon: 'react' | 'python' | 'java' | 'typescript' | 'nextjs' | 'nodejs' | 'aws' | 'kubernetes' | 'docker' | 'git' | 'linux' | 'spring' | 'tailwind' | 'jenkins' | 'sql' | 'bash' | 'cpp' | 'datadog' | 'splunk';
 }
 
 export interface SocialLink {
@@ -15,20 +11,33 @@ export interface SocialLink {
 
 export const profile = {
   name: 'Jzon Livingston',
-  tagline: 'Full-Stack Developer',
-  status: 'Available' as const,
-  bio: 'Passionate software engineer with a love for building performant, user-centric applications. I specialize in full-stack development with modern JavaScript frameworks, cloud infrastructure, and developer tooling.',
-  skills: [
-    { name: 'React', firstUsed: 'First used 5 years ago', proficiency: 'Expert', level: 95 },
-    { name: 'TypeScript', firstUsed: 'First used 4 years ago', proficiency: 'Expert', level: 90 },
-    { name: 'Node.js', firstUsed: 'First used 6 years ago', proficiency: 'Expert', level: 92 },
-    { name: 'Python', firstUsed: 'First used 4 years ago', proficiency: 'Advanced', level: 80 },
-    { name: 'Next.js', firstUsed: 'First used 3 years ago', proficiency: 'Advanced', level: 85 },
-    { name: 'AWS', firstUsed: 'First used 3 years ago', proficiency: 'Proficient', level: 70 },
-  ] satisfies Skill[],
+  tagline: 'Software Engineer',
+  status: 'Open to opportunities' as const,
+  bio: "I'm a software engineer who thrives at the intersection of backend systems and cloud infrastructure. From migrating legacy apps to AWS microservices, to automating mainframe workloads with Python, I build things that scale — and occasionally things that look this cool.",
+  technologies: [
+    { name: 'Python',      color: '#3776AB', icon: 'python'     },
+    { name: 'Java',        color: '#ED8B00', icon: 'java'       },
+    { name: 'C++',         color: '#00599C', icon: 'cpp'        },
+    { name: 'TypeScript',  color: '#3178C6', icon: 'typescript' },
+    { name: 'React',       color: '#61DAFB', icon: 'react'      },
+    { name: 'Next.js',     color: '#000000', icon: 'nextjs'     },
+    { name: 'Node.js',     color: '#339933', icon: 'nodejs'     },
+    { name: 'Tailwind',    color: '#06B6D4', icon: 'tailwind'   },
+    { name: 'Spring Boot', color: '#6DB33F', icon: 'spring'     },
+    { name: 'AWS',         color: '#FF9900', icon: 'aws'        },
+    { name: 'Kubernetes',  color: '#326CE5', icon: 'kubernetes' },
+    { name: 'Docker',      color: '#2496ED', icon: 'docker'     },
+    { name: 'Git',         color: '#F05032', icon: 'git'        },
+    { name: 'Linux',       color: '#FCC624', icon: 'linux'      },
+    { name: 'Jenkins',     color: '#D24939', icon: 'jenkins'    },
+    { name: 'SQL',         color: '#336791', icon: 'sql'        },
+    { name: 'Bash',        color: '#4EAA25', icon: 'bash'       },
+    { name: 'Datadog',     color: '#632CA6', icon: 'datadog'    },
+    { name: 'Splunk',      color: '#65BC47', icon: 'splunk'     },
+  ] satisfies TechIcon[],
   socials: [
-    { label: 'GitHub', url: 'https://github.com' },
-    { label: 'LinkedIn', url: 'https://linkedin.com' },
-    { label: 'Email', url: 'mailto:hello@example.com' },
+    { label: 'GitHub',   url: 'https://github.com/Araviss' },
+    { label: 'LinkedIn', url: 'https://linkedin.com/in/jzonlivingston' },
+    { label: 'Email',    url: 'mailto:jzonlivingston@gmail.com' },
   ] satisfies SocialLink[],
 } as const;

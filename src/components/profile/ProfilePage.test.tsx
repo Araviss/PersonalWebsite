@@ -55,20 +55,16 @@ describe('ProfilePage', () => {
     expect(screen.getByText(profile.status)).toBeInTheDocument();
   });
 
-  it('renders all skills', () => {
+  it('renders all technology names', () => {
     render(<ProfilePage />);
-    for (const skill of profile.skills) {
-      expect(screen.getByText(skill.name)).toBeInTheDocument();
+    for (const tech of profile.technologies) {
+      expect(screen.getAllByText(tech.name).length).toBeGreaterThan(0);
     }
   });
 
-  it('renders skill proficiency labels', () => {
+  it('renders the Technologies section label', () => {
     render(<ProfilePage />);
-    const uniqueLabels = [...new Set(profile.skills.map((s) => s.proficiency))];
-    for (const label of uniqueLabels) {
-      const count = profile.skills.filter((s) => s.proficiency === label).length;
-      expect(screen.getAllByText(label)).toHaveLength(count);
-    }
+    expect(screen.getByText('Technologies')).toBeInTheDocument();
   });
 
   it('renders social links', () => {
@@ -81,7 +77,7 @@ describe('ProfilePage', () => {
 
   it('renders section labels', () => {
     render(<ProfilePage />);
-    expect(screen.getByText('Skill Activity')).toBeInTheDocument();
+    expect(screen.getByText('Technologies')).toBeInTheDocument();
     expect(screen.getByText('Online')).toBeInTheDocument();
   });
 
