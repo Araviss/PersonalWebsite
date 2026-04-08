@@ -136,7 +136,7 @@ export function ProfilePage() {
       {/* Left — fullbody avatar video */}
       <motion.div
         className="hidden h-full flex-shrink-0 md:block"
-        style={{ width: 'clamp(180px, 22vw, 280px)' }}
+        style={{ width: 'clamp(220px, 32vw, 380px)' }}
         variants={staggerItem}
       >
         <video
@@ -153,84 +153,66 @@ export function ProfilePage() {
         />
       </motion.div>
 
-      {/* Right — info */}
-      <div className="flex min-w-0 flex-1 flex-col gap-5 overflow-y-auto px-8 py-8">
-        {/* Name + status */}
-        <motion.div className="flex flex-col gap-1" variants={staggerItem}>
-          <h1 className="text-2xl font-bold text-on-surface">{profile.name}</h1>
-          <p className="text-sm text-on-surface-muted">{profile.tagline}</p>
-          <span className="flex items-center gap-1.5 text-xs text-on-surface-muted">
+      {/* Right — sleek info panel */}
+      <div className="flex min-w-0 flex-1 flex-col justify-center gap-8 px-10 py-10">
+        {/* Name + tagline */}
+        <motion.div className="flex flex-col gap-2" variants={staggerItem}>
+          <h1 className="text-3xl font-bold text-on-surface">{profile.name}</h1>
+          <div className="flex items-center gap-2">
             <span className="inline-block h-2 w-2 rounded-full bg-[#48d597]" aria-hidden="true" />
-            {profile.status}
-          </span>
+            <p className="text-sm text-on-surface-muted">{profile.status}</p>
+          </div>
         </motion.div>
-
-        <motion.hr className="border-separator" variants={staggerItem} />
 
         {/* Bio */}
         <motion.p
-          className="text-sm leading-relaxed text-on-surface-muted"
+          className="max-w-sm text-base leading-relaxed text-on-surface-muted"
           variants={staggerItem}
         >
           {profile.bio}
         </motion.p>
 
-        <motion.hr className="border-separator" variants={staggerItem} />
-
-        {/* Tech icons */}
-        <motion.section variants={staggerItem}>
-          <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-on-surface-muted">
-            Technologies
-          </h2>
-          <motion.div
-            className="grid grid-cols-4 gap-5"
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-          >
-            {profile.technologies.map((tech) => (
-              <motion.div
-                key={tech.name}
-                variants={staggerItem}
-                whileHover={{ scale: 1.1, y: -3 }}
-                className="flex flex-col items-center gap-2"
+        {/* Tech icons — single row */}
+        <motion.div
+          className="flex gap-4"
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+        >
+          {profile.technologies.map((tech) => (
+            <motion.div
+              key={tech.name}
+              variants={staggerItem}
+              whileHover={{ scale: 1.12, y: -4 }}
+              className="flex flex-col items-center gap-2"
+            >
+              <div
+                className="flex h-14 w-14 items-center justify-center rounded-2xl shadow-md"
+                style={{ backgroundColor: tech.color }}
               >
-                <div
-                  className="flex h-16 w-16 items-center justify-center rounded-2xl shadow-lg"
-                  style={{ backgroundColor: tech.color }}
-                >
-                  <TechIconSvg icon={tech.icon} color={tech.color} />
-                </div>
-                <span className="text-center text-xs leading-tight text-on-surface-muted">
-                  {tech.name}
-                </span>
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.section>
-
-        <motion.hr className="border-separator" variants={staggerItem} />
+                <TechIconSvg icon={tech.icon} color={tech.color} />
+              </div>
+              <span className="text-center text-[11px] text-on-surface-muted">
+                {tech.name}
+              </span>
+            </motion.div>
+          ))}
+        </motion.div>
 
         {/* Social links */}
-        <motion.section variants={staggerItem}>
-          <h2 className="mb-3 text-xs font-semibold uppercase tracking-widest text-on-surface-muted">
-            Online
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            {profile.socials.map((link) => (
-              <a
-                key={link.label}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 rounded-full bg-surface-elevated px-4 py-2 text-sm font-medium text-on-surface transition-opacity hover:opacity-75"
-              >
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#48d597]" aria-hidden="true" />
-                {link.label}
-              </a>
-            ))}
-          </div>
-        </motion.section>
+        <motion.div className="flex gap-3" variants={staggerItem}>
+          {profile.socials.map((link) => (
+            <a
+              key={link.label}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full bg-surface-elevated px-5 py-2 text-sm font-medium text-on-surface transition-opacity hover:opacity-75"
+            >
+              {link.label}
+            </a>
+          ))}
+        </motion.div>
       </div>
     </motion.div>
   );

@@ -40,9 +40,9 @@ describe('ProfilePage', () => {
     expect(screen.getByText(profile.name)).toBeInTheDocument();
   });
 
-  it('renders the tagline', () => {
+  it('renders the status', () => {
     render(<ProfilePage />);
-    expect(screen.getByText(profile.tagline)).toBeInTheDocument();
+    expect(screen.getByText(profile.status)).toBeInTheDocument();
   });
 
   it('renders the bio', () => {
@@ -62,23 +62,12 @@ describe('ProfilePage', () => {
     }
   });
 
-  it('renders the Technologies section label', () => {
-    render(<ProfilePage />);
-    expect(screen.getByText('Technologies')).toBeInTheDocument();
-  });
-
   it('renders social links', () => {
     render(<ProfilePage />);
     for (const link of profile.socials) {
       const el = screen.getByText(link.label);
       expect(el.closest('a')).toHaveAttribute('href', link.url);
     }
-  });
-
-  it('renders section labels', () => {
-    render(<ProfilePage />);
-    expect(screen.getByText('Technologies')).toBeInTheDocument();
-    expect(screen.getByText('Online')).toBeInTheDocument();
   });
 
   it('renders the fullbody video', () => {
