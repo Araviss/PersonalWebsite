@@ -119,7 +119,7 @@ function TechIconSvg({ icon, color }: { icon: TechIcon['icon']; color: string })
   };
 
   return (
-    <svg viewBox="0 0 24 24" className="h-7 w-7" aria-hidden="true">
+    <svg viewBox="0 0 24 24" className="h-9 w-9" aria-hidden="true">
       {paths[icon]}
     </svg>
   );
@@ -183,7 +183,7 @@ export function ProfilePage() {
             Technologies
           </h2>
           <motion.div
-            className="grid grid-cols-4 gap-3 sm:grid-cols-5 lg:grid-cols-6"
+            className="grid grid-cols-4 gap-5"
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
@@ -192,16 +192,16 @@ export function ProfilePage() {
               <motion.div
                 key={tech.name}
                 variants={staggerItem}
-                whileHover={{ scale: 1.08, y: -2 }}
-                className="flex flex-col items-center gap-1.5"
+                whileHover={{ scale: 1.1, y: -3 }}
+                className="flex flex-col items-center gap-2"
               >
                 <div
-                  className="flex h-12 w-12 items-center justify-center rounded-xl shadow-md"
+                  className="flex h-16 w-16 items-center justify-center rounded-2xl shadow-lg"
                   style={{ backgroundColor: tech.color }}
                 >
                   <TechIconSvg icon={tech.icon} color={tech.color} />
                 </div>
-                <span className="text-center text-[10px] leading-tight text-on-surface-muted">
+                <span className="text-center text-xs leading-tight text-on-surface-muted">
                   {tech.name}
                 </span>
               </motion.div>
